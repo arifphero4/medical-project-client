@@ -1,15 +1,16 @@
 import React from "react";
 import treatment from "../../assets/images/treatment.png";
+import PrimaryButton from "../Shared/PrimaryButton";
 
 const Exceptional = () => {
   return (
-    <div class="hero min-h-screen px-20">
-      <div class="hero-content flex-col lg:flex-row-reverse">
+    <div className="hero min-h-screen ">
+      <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="mx-12">
-          <h1 class="text-5xl font-bold">
+          <h1 className="text-5xl font-bold">
             Exceptional Dental Care, on Your Terms
           </h1>
-          <p class="py-6">
+          <p className="">
             It is a long established fact that a reader will be distracted by
             the readable content of a page when looking at its layout. The point
             of using Lorem Ipsumis that it has a more-or-less normal
@@ -17,11 +18,9 @@ const Exceptional = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <button class="btn btn-primary uppercase font-bold bg-gradient-to-r from-secondary to-primary text-white">
-            Get Started
-          </button>
+          <PrimaryButton> Get Started </PrimaryButton>
         </div>
-        <img src={treatment} class="max-w-sm rounded-lg shadow-2xl" />
+        <img src={treatment} className="lg:max-w-sm rounded-lg shadow-2xl" />
       </div>
     </div>
   );
