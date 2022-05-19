@@ -5,6 +5,7 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import Loading from "../Shared/Loading";
 
 const Login = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -16,10 +17,26 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  let signInError;
+
+  if (loading || googleLoading) {
+    return <Loading></Loading>;
+  }
+
+  if (error || googleError) {
+    signInError = (
+      <p className="text-red-500">{error?.message || googleError?.message} </p>
+    );
+  }
+
   if (googleUser) {
     console.log(googleUser);
   }
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
+  };
   return (
     <div className="flex h-screen justify-center items-center">
       <div className="card w-96 bg-base-100 shadow-xl">
@@ -90,7 +107,7 @@ const Login = () => {
                 )}
               </label>
             </div>
-
+            {signInError}
             <input
               className="btn btn-secondary w-full max-w-xs text-white uppercase"
               type="submit"
