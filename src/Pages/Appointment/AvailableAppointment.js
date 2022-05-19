@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
-import Service from "../Home/Service";
 import BookingService from "./BookingService";
 
 const AvailableAppointment = ({ date }) => {
