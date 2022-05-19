@@ -1,17 +1,23 @@
 import React from "react";
 import auth from "../../firebase.init";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  if (user) {
-    console.log(user);
+  if (googleUser) {
+    console.log(googleUser);
   }
   const onSubmit = (data) => console.log(data);
   return (
@@ -86,7 +92,7 @@ const Login = () => {
             </div>
 
             <input
-              className="btn btn-secondary w-full max-w-xs text-white"
+              className="btn btn-secondary w-full max-w-xs text-white uppercase"
               type="submit"
               value="Login"
             />
