@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../firebase.init";
 import {
   useSignInWithEmailAndPassword,
@@ -24,6 +24,11 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
+  useEffect(() => {
+    if (user || googleUser) {
+      navigate(from, { replace: true });
+    }
+  }, [user, googleUser, from, navigate]);
   if (loading || googleLoading) {
     return <Loading></Loading>;
   }
@@ -34,9 +39,6 @@ const Login = () => {
     );
   }
 
-  if (user || googleUser) {
-    navigate(from, { replace: true });
-  }
   const onSubmit = (data) => {
     console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
